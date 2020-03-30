@@ -102,4 +102,29 @@ document.getElementById('add-todo').onclick = addTodo;
 function addTodo() {
     // test basic functionality - connection
     // console.log('click');
+    const newTodo = document.createElement('li');
+    const input = document.querySelector('input');
+    // console.log(input.value);
+    newTodo.innerText = input.value;
+    const parent = document.getElementById('todo-list');
+
+    parent.appendChild(newTodo);
+    // have to add this onclick here because it is a new element and the loop
+    // on line 119 did take this in regard
+    newTodo.onclick = toggleTodo;
+    // clear the input
+    input.value = '';
+}
+
+// add an onclick on all elements of the list
+document.querySelectorAll('#todo-list li').forEach(function (item) {
+    item.onclick = toggleTodo;
+});
+
+// we wanna add the functionality that whenever we click on a word on the todo list
+// the class 'checked' gets toggeled
+function toggleTodo(event) {
+    console.log(event);
+    // console.log(event.currentTarget.classList);
+    event.currentTarget.classList.toggle('checked');
 }
